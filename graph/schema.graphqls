@@ -1,0 +1,28 @@
+type Todo {
+    _id : ID!
+    activity : String!
+    detail : String!
+    user : User!
+}
+
+type User {
+    _id : ID!
+    username : String!
+}
+
+type Query {
+    todos: [Todo!]!
+    todo(id : String!): Todo!
+}
+
+input newTodo {
+    activity: String!
+    detail: String!
+    userID : String!
+}
+
+type Mutation {
+    createTodo(input: newTodo!) : Todo!
+    updateTodo(id:String!,input: newTodo!) : Todo!
+    deleteTodo(input: String!) : Todo!
+}
