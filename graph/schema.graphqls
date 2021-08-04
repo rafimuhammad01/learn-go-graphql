@@ -1,28 +1,26 @@
-type Todo {
-    _id : ID!
-    activity : String!
-    detail : String!
-    user : User!
-}
+scalar Time
 
 type User {
-    _id : ID!
-    username : String!
+    id: ID!
+    username: String!
+    password: String!
+    email: String!
+    name: String!
+    created_at: Time!
 }
 
 type Query {
-    todos: [Todo!]!
-    todo(id : String!): Todo!
+    listUser: [User!]!
+    getUser(id: ID!) : User!
 }
 
-input newTodo {
-    activity: String!
-    detail: String!
-    userID : String!
+input NewUser {
+    username: String!
+    password: String!
+    email: String!
+    name: String!
 }
 
 type Mutation {
-    createTodo(input: newTodo!) : Todo!
-    updateTodo(id:String!,input: newTodo!) : Todo!
-    deleteTodo(input: String!) : Todo!
+    createUser(input: NewUser): User
 }

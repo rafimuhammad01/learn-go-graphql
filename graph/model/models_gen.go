@@ -2,20 +2,9 @@
 
 package model
 
-type Todo struct {
-	ID       string `json:"_id" bson:"_id"`
-	Activity string `json:"activity" bson:"activity"`
-	Detail   string `json:"detail" bson:"detail"`
-	User     *User  `json:"user"`
-}
-
-type User struct {
-	ID       string `json:"_id"`
+type NewUser struct {
 	Username string `json:"username"`
-}
-
-type NewTodo struct {
-	Activity string `json:"activity"`
-	Detail   string `json:"detail"`
-	UserID   string `json:"userID"`
+	Password string `json:"password"`
+	Email    string `json:"email"`
+	Name     string `json:"name"`
 }
