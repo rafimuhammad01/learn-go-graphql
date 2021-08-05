@@ -1,4 +1,5 @@
 scalar Time
+scalar Void
 
 type User {
     id: ID!
@@ -9,18 +10,27 @@ type User {
     created_at: Time!
 }
 
+
 type Query {
-    listUser: [User!]!
+    listUser(page_id: Int!, page_size: Int!): [User!]!
     getUser(id: ID!) : User!
 }
 
-input NewUser {
+input CreateUserParams {
     username: String!
     password: String!
     email: String!
     name: String!
 }
 
+input EditUserParams {
+    id: ID!
+    name: String!
+    password: String!
+}
+
 type Mutation {
-    createUser(input: NewUser): User
+    createUser(input: CreateUserParams!): User!
+    editUser(input: EditUserParams!): User!
+    deleteUser(id: ID!): Void!
 }

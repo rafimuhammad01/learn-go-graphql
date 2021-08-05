@@ -14,11 +14,6 @@ import (
 )
 
 const (
-	db_host     = "localhost"
-	db_port     = 5432
-	db_user     = "rafimuhammad01"
-	db_password = "rafimuhammad01"
-	db_name   	= "learn-go-graphql"
 	defaultPort = "8080"
 )
 

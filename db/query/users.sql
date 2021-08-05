@@ -11,3 +11,12 @@ ORDER BY id
 LIMIT $1
 OFFSET $2;
 
+-- name: EditUser :one
+UPDATE users
+SET name = $2, password=$3
+WHERE id = $1
+RETURNING *;
+
+-- name: DeleteUser :exec
+DELETE FROM users
+WHERE id=$1;

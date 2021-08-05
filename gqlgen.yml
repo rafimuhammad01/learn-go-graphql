@@ -57,3 +57,9 @@ models:
   User:
     model:
       - github.com/rafimuhammad01/learn-go-graphql/db/sqlc.User
+  CreateUserParams:
+    model:
+      - github.com/rafimuhammad01/learn-go-graphql/db/sqlc.CreateUserParams
+  EditUserParams:
+    model:
+      - github.com/rafimuhammad01/learn-go-graphql/db/sqlc.EditUserParams

@@ -37,6 +37,43 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, e
 	return i, err
 }
 
+const deleteUser = `-- name: DeleteUser :exec
+DELETE FROM users
+WHERE id=$1
+`
+
+func (q *Queries) DeleteUser(ctx context.Context, id int64) error {
+	_, err := q.exec(ctx, q.deleteUserStmt, deleteUser, id)
+	return err
+}
+
+const editUser = `-- name: EditUser :one
+UPDATE users
+SET name = $2, password=$3
+WHERE id = $1
+RETURNING id, username, email, password, name, created_at
+`
+
+type EditUserParams struct {
+	ID       int64  `json:"id"`
+	Name     string `json:"name"`
+	Password string `json:"password"`
+}
+
+func (q *Queries) EditUser(ctx context.Context, arg EditUserParams) (User, error) {
+	row := q.queryRow(ctx, q.editUserStmt, editUser, arg.ID, arg.Name, arg.Password)
+	var i User
+	err := row.Scan(
+		&i.ID,
+		&i.Username,
+		&i.Email,
+		&i.Password,
+		&i.Name,
+		&i.CreatedAt,
+	)
+	return i, err
+}
+
 const getUser = `-- name: GetUser :one
 SELECT id, username, email, password, name, created_at FROM users
 WHERE id = $1 LIMIT 1
