@@ -1,19 +1,29 @@
 scalar Time
 scalar Void
+scalar NullString
 
 type User {
     id: ID!
     username: String!
-    password: String!
     email: String!
     name: String!
     created_at: Time!
 }
 
+type Todo {
+    id: ID!
+    name: String!
+    description: NullString
+    user: User!
+    created_at: Time!
+}
 
 type Query {
     listUser(page_id: Int!, page_size: Int!): [User!]!
-    getUser(id: ID!) : User!
+    getUser(id: ID!): User!
+
+    listTodo(page_id: Int!, page_size: Int!): [Todo!]!
+    getTodo(id: ID!): Todo!
 }
 
 input CreateUserParams {
@@ -29,8 +39,24 @@ input EditUserParams {
     password: String!
 }
 
+input CreateTodoParams {
+    name: String!
+    description: NullString
+    user_id: ID!
+}
+
+input EditTodoParams {
+    id: ID!
+    name: String!
+    description: NullString
+}
+
 type Mutation {
     createUser(input: CreateUserParams!): User!
     editUser(input: EditUserParams!): User!
     deleteUser(id: ID!): Void!
+
+    createTodo(input: CreateTodoParams!): Todo!
+    editTodo(input: EditTodoParams!): Todo!
+    deleteTodo(id: ID!): Void!
 }

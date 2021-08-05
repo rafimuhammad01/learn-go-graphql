@@ -8,6 +8,7 @@ import (
 
 func (r *mutationResolver) CreateUser(ctx context.Context, input db.CreateUserParams) (*db.User, error) {
 	user, err := r.Queries.CreateUser(ctx, input)
+
 	if err != nil {
 		return nil, err
 	}
@@ -66,3 +67,4 @@ func (r *queryResolver) GetUser(ctx context.Context, id string) (*db.User, error
 
 	return &result, nil
 }
+
